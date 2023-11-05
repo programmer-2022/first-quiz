@@ -25,11 +25,20 @@ ANIMALS_FOOD = [
   (2, "randolph"), # termites
 ]
 
-def insert_foods(con):
-  con.executemany("INSERT INTO favorite_foods VALUES(?, ?, ?)", FOODS)
+def test_alter_tables_with_favorite_food():
+  pets_db.create_db()
+
+  with pets_db.get_connection() as con:
+    create_favorite_foods(con)
+    insert_foods(con)
+    alter_people_animals_food(con)
+    update_people_animals_food(con)
 
 def create_favorite_foods(con):
   con.execute(sql_create_favorite_foods)
+
+def insert_foods(con):
+  con.executemany("INSERT INTO favorite_foods VALUES(?, ?, ?)", FOODS)
 
 def alter_people_animals_food(con):
   con.executescript(sql_alter_tables_with_favorite_food);
@@ -45,15 +54,6 @@ def test_create_favorite_foods():
     create_favorite_foods(con)
     insert_foods(con)
     
-def test_alter_tables_with_favorite_food():
-  pets_db.create_db()
-
-  with pets_db.get_connection() as con:
-    create_favorite_foods(con)
-    insert_foods(con)
-    alter_people_animals_food(con)
-    update_people_animals_food(con)
-
 def test_select_all_vegetarian_pets():
   pets_db.create_db()
 
@@ -67,7 +67,7 @@ def test_select_all_vegetarian_pets():
     rows = res.fetchall()
 
   rows.sort()
-
+  
   assert rows[0] == ('leyla', 'spinach')
   assert rows[1] == ('martin', 'spinach')
   assert rows[2] == ('ricky', 'cough drops')

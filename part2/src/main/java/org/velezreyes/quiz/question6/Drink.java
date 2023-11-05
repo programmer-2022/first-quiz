@@ -1,7 +1,10 @@
 package org.velezreyes.quiz.question6;
 
 public interface Drink {
-  public String getName();
+  String getName();
 
-  public boolean isFizzy();
+  boolean isFizzy();
+
+  float getPrice();
+
 }

@@ -1,19 +1,27 @@
+from question3 import alchemy_combine, make_oven
+
+
 def test_alchemy_combine():
 
-  assert alchemy_combine(
-    make_oven(),
-    ["lead", "mercury"],
-    5000
-  ) == "gold"
+    #Mocks
+    list_ingredients_1 = ["lead", "mercury"]
+    temperature1 = 5000
+    value_expect_1 = "gold"
 
-  assert alchemy_combine(
-    make_oven(),
-    ["water", "air"],
-    -100
-  ) == "snow"
+    list_ingredients_2 = ["water", "air"]
+    temperature2 = -100
+    value_expect_2 = "snow"
 
-  assert alchemy_combine(
-    make_oven(),
-    ["cheese", "dough", "tomato"],
-    150
-  ) == "pizza"
+    list_ingredients_3 = ["cheese", "dough", "tomato"]
+    temperature3 = 150
+    value_expect_3 = "pizza"
+
+
+    assert alchemy_combine(make_oven(), list_ingredients_1,
+                           temperature1) == value_expect_1
+
+    assert alchemy_combine(make_oven(), list_ingredients_2,
+                           temperature2) == value_expect_2
+
+    assert alchemy_combine(make_oven(), list_ingredients_3,
+                           temperature3) == value_expect_3
